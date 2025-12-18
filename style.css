@@ -1,0 +1,197 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+
+body {
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: flex-end;
+background: linear-gradient(to top, #02031c, #000);
+overflow: hidden;
+}
+
+
+
+.scene {
+position: relative;
+height: 90vh;
+}
+
+
+.rose {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Najpierw pojawienie się, potem oddychanie */
+  animation:
+    rose-rise 3s ease-out forwards,
+    rose-breathe 6s ease-in-out infinite;
+  animation-delay: 0s, 3.4s;
+}
+
+
+/* Łodyga */
+.stem {
+width: 1.5vmin;
+height: 45vmin;
+background: linear-gradient(to top, #0e5f4f, #1aa37a);
+border-radius: 2vmin;
+position: relative;
+}
+
+
+/* Kolce */
+.stem::before,
+.stem::after {
+content: '';
+position: absolute;
+width: 1.2vmin;
+height: 0.6vmin;
+background: #0b3f33;
+clip-path: polygon(0 50%, 100% 0, 20% 150%);
+}
+.stem::before
+ {
+content: '';
+position: absolute;
+width: 1.2vmin;
+height: 0.6vmin;
+background: #0b3f33;
+clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.stem::before {
+left: -1.1vmin;
+top: 30%;
+}
+
+
+.stem::after {
+right: -1.1vmin;
+top: 55%;
+
+
+}
+
+
+/* Pąk */
+.bud {
+position: absolute;
+bottom: 42vmin;
+width: 10vmin;
+height: 10vmin;
+}
+
+
+.petal {
+position: absolute;
+bottom: 0;
+left: 50%;
+transform-origin: center bottom;
+transform: translateX(-50%) scale(0.2) rotate(0deg);
+width: 6vmin;
+height: 8vmin;
+background: linear-gradient(to bottom, #ff3b6a, #8b0d2e);
+border-radius: 60% 60% 50% 50% / 80% 80% 30% 30%;
+animation: bloom 3s forwards;
+}
+
+
+.petal--1 {
+--angle: -45deg;
+transform: translateX(-50%) rotate(-45deg) scale(0.2);
+animation-delay: 0.3s;
+}
+.petal--2 {
+--angle: -20deg;
+transform: translateX(-50%) rotate(-20deg) scale(0.2);
+animation-delay: 0.6s;
+}
+.petal--3 {
+--angle: 20deg;
+transform: translateX(-50%) rotate(20deg) scale(0.2);
+animation-delay: 0.9s;
+}
+.petal--4 {
+--angle: 45deg;
+transform: translateX(-50%) rotate(45deg) scale(0.2);
+animation-delay: 1.2s;
+}
+
+
+.petal--center {
+
+--angle: 0deg;
+width: 4vmin;
+height: 6vmin;
+background: linear-gradient(to bottom, #ff3b6a, #8b0d2e);
+animation-delay: 1.5s;
+}
+
+@keyframes bloom {
+0% {
+transform: translateX(-50%) scale(0.1) rotate(0deg);
+opacity: 0;
+}
+60% {
+opacity: 1;
+}
+100% {
+transform: translateX(-50%) scale(1) rotate(var(--angle));
+}
+}
+
+
+
+/* Napis pod różą */
+.message {
+margin-top: 4vmin;
+font-size: 3.2vmin;
+font-family: 'Segoe UI', sans-serif;
+letter-spacing: 0.15em;
+color: #ffd1dc;
+opacity: 0;
+animation: text-fade 3s ease-out forwards;
+animation-delay: 1.8s;
+}
+
+
+@keyframes text-fade {
+from {
+opacity: 0;
+transform: translateY(3vmin);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes rose-rise {
+  from {
+    transform: translateY(10vmin);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rose-breathe {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-0.7vmin) scale(1.015);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
